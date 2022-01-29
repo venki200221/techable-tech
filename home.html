@@ -20,6 +20,13 @@
 
 <!-- Font awasome -->
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <section id="banner">
@@ -162,26 +169,24 @@
     <div class="title-text">
         <p>Reviews</p>
         <h1>They believed  Us</h1>
-        </div>
-        <div class="collab-row">
-            <div class="collab-col">           
-              <video id="ID1" class="video-js vjs-big-play-centered" controls preload="auto" width="300px" height="275px" >
-                <source src="https://quantumhunts.com/user/manage/videos/1825/2020-11-30-13-35-47/909099-win20201112141001pro.mp4#t=0.1" type='video/mp4' />
-            </video>
+    </div>
+        <center>
+            <div class="collab-row">
+            
+                <center><div class="collab-col">
+                    <video id="video1" class="vid"  controls="true"  height="275px" width="300px" >
+                        <source src="https://quantumhunts.com/user/manage/videos/588/2020-07-01-12-43-41/544867-sonia-sinha.mp4" type="video/mp4">
+                    </video>
+                    <video id="video2" class="vid2" autoplay muted  style="display:none;" height="275px" width="300px">
+                        <source src="http://grochtdreis.de/fuer-jsfiddle/video/sintel_trailer-480.mp4" type="video/mp4">
+                      </video>
+                      <button id="btn" class="btn btn-outline-secondary" onclick="handleClick()" style="visibility: hidden;" >Skip Add</button>
+    
+                 </div>
+                </center>
+    
             </div>
-            <div class="collab-col">
-             <video id="ID2" class="video-js vjs-big-play-centered" controls preload="auto" width="300px" height="275px" >
-                <source src="https://quantumhunts.com/user/manage/videos/588/2020-07-01-12-43-41/544867-sonia-sinha.mp4" type='video/mp4' />
-            </video>
-
-            </div>
-            <div class="collab-col">
-           <video id="ID3" class="video-js vjs-big-play-centered" controls preload="auto" width="300px" height="275px" >
-            <source src="https://quantumhunts.com/user/manage/videos/1403/2020-08-20-11-19-07/557187-sharmistha-video-resume.mp4" type='video/mp4' />
-        </video>
-            </div>
-
-        </div>
+        </center>
 
 </section>
 
@@ -301,5 +306,55 @@
 
 <script src="https://vjs.zencdn.net/7.6.0/video.js"></script>
 <script src="index.js"></script>
+<script type="text/javascript">
+    var vid = document.getElementById('video1');
+    var vid2 = document.getElementById('video2');
+    var but=document.getElementById("btn");
+    
+    vid.addEventListener("ended", hideVideo, false);
+    
+    function hideVideo(event) {
+        console.log("hideVideo");
+        var vid = document.getElementById('video1');
+        vid.pause();
+        vid.style.display='none';
+        vid.removeEventListener("ended", hideVideo, false);
+    
+        vid2.style.display='block';
+        vid2.addEventListener("ended", hideVideo2, false);
+        vid2.load();
+        vid2.muted=false;
+        but.style.visibility="visible";
+    
+    }
+    
+    
+    
+    function hideVideo2(event) {
+        console.log("hideVideo2");
+        var vid2 = document.getElementById('video2');
+        vid2.style.display='none';
+        vid2.muted=true;
+        vid2.pause();
+    
+    
+        var vid = document.getElementById('video1');
+        vid.style.display='block';
+        vid.play();
+        but.style.visibility="hidden";
+    
+    }
+    
+    function handleClick(){
+    hideVideo2();
+    
+    }
+    
+    
+    
+    // start timer in milliseconds
+    setTimeout( hideVideo,10000);
+    
+    </script>
 </body>
 </html>
